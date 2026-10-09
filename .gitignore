@@ -1,0 +1,38 @@
+# ------- Compilados / build -------
+build/
+target/
+bin/
+out/
+*.class
+
+# ------- IDEs -------
+# Eclipse / STS
+.settings/
+.classpath
+.project
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+# VS Code
+.vscode/
+
+# ------- Despliegue / empaquetado -------
+*.war
+*.ear
+
+# ------- Sistema operativo -------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# ------- Logs y temporales -------
+*.log
+*.tmp

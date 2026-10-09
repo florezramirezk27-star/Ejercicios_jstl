@@ -1,5 +1,12 @@
 # Ejercicios JSTL
 
+![Java](https://img.shields.io/badge/Java-8-orange)
+![JSP](https://img.shields.io/badge/JSP-Java%20EE-blue)
+![JSTL](https://img.shields.io/badge/JSTL-1.2-green)
+![Tomcat](https://img.shields.io/badge/Tomcat-8.5-yellow)
+![MySQL](https://img.shields.io/badge/MySQL-5.x-4479A1)
+![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen)
+
 Proyecto web en **JavaServer Pages (JSP)** con la **JavaServer Pages Standard Tag Library (JSTL)**.
 Reúne la solución de dos guías de ejercicios:
 
@@ -29,10 +36,14 @@ Autor: **Kevin Flórez** — Programación en Java.
 ```
 trabajo_jstl/
 ├── index.jsp                     # Página de inicio (portada con enlaces a ambas guías)
+├── LICENSE                       # Licencia MIT
+├── .gitignore                    # Archivos excluidos del control de versiones
 ├── css/
 │   └── estilo.css                # Estilos personalizados
 ├── img/
 │   └── javalog2.png              # Logo
+├── docs/
+│   └── capturas/                 # Capturas de pantalla (ver sección)
 ├── version2006/                  # Guía 2006 (8 ejercicios)
 │   ├── index.jsp
 │   └── Ejercicio1.jsp ... Ejercicio8.jsp
@@ -80,6 +91,16 @@ trabajo_jstl/
 | 8 | `ForTokens.jsp` | `c:forTokens` |
 | 9 | `Informacion.jsp` | SQL JSTL con `sql:param` |
 | 10 | `internacionalizacion.jsp` | Formato i18n con la librería `fmt` |
+
+---
+
+## Capturas de pantalla
+
+> Las imágenes se guardan en [`docs/capturas/`](docs/capturas/). Reemplaza estos archivos por tus propias capturas.
+
+| Inicio | Guía 2006 | Guía 2024 |
+| :----: | :-------: | :-------: |
+| ![Inicio](docs/capturas/portada.png) | ![Guía 2006](docs/capturas/guia2006.png) | ![Guía 2024](docs/capturas/guia2024.png) |
 
 ---
 
@@ -136,4 +157,6 @@ trabajo_jstl/
 
 ## Licencia
 
-Proyecto académico — Kevin Flórez © Derechos reservados.
+Este proyecto se distribuye bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+© 2026 Kevin Flórez.
