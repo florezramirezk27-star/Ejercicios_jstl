@@ -1,0 +1,11 @@
+{
+  "deploy": {
+    "container": "TOMCAT9",
+    "war": [
+      {
+        "file": "trabajo_jstl.war",
+        "context": "/"
+      }
+    ]
+  }
+}

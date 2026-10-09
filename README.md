@@ -26,7 +26,7 @@ Autor: **Kevin Flórez** — Programación en Java.
 | Servidor          | Apache Tomcat 8.5                                         |
 | JDK               | Java 8                                                    |
 | Base de datos     | MySQL (base de datos `empleados`)                         |
-| Driver JDBC       | `mysql-connector-java-5.1.49.jar`                         |
+| Driver JDBC       | `mysql-connector-j-8.0.33.jar`                            |
 | Front-end         | Bootstrap 5, Font Awesome 5, CSS propio (`css/estilo.css`) |
 
 ---
@@ -52,12 +52,15 @@ trabajo_jstl/
 │   └── Eje1.jsp, Datos.jsp, set1.jsp, ...
 ├── lib-2024/
 │   └── jstl-1.2.jar
+├── clevercloud/
+│   └── war.json                  # Config de despliegue en Clever Cloud (TOMCAT9)
 ├── WEB-INF/
 │   ├── web.xml                   # Descriptor de despliegue (welcome-file: index.jsp)
-│   ├── lib/                      # Librerías de la app (jstl-1.2.jar, mysql-connector)
+│   ├── lib/                      # Librerías de la app (jstl-1.2.jar, mysql-connector-j-8.0.33.jar)
 │   └── jspf/
 │       ├── conexion.jspf         # DataSource JSTL para la Guía 2006
 │       └── conexion2024.jspf     # DataSource JSTL para la Guía 2024
+├── trabajo_jstl.war              # WAR empaquetado para desplegar (dry war)
 ├── jstl-1.2.jar
 └── mysql-connector-java-5.1.49.jar
 ```
@@ -122,20 +125,22 @@ trabajo_jstl/
    Copia la carpeta del proyecto dentro de `webapps/` de Tomcat (por ejemplo como `trabajo_jstl`), o impórtalo como *Dynamic Web Project* en tu IDE.
 
 3. **Librerías**
-   Verifica que `jstl-1.2.jar` y `mysql-connector-java-5.1.49.jar` estén en `WEB-INF/lib/`. Deben estar también disponibles para Tomcat.
+   Verifica que `jstl-1.2.jar` y `mysql-connector-j-8.0.33.jar` estén en `WEB-INF/lib/`. Deben estar también disponibles para Tomcat.
 
 4. **Configurar la base de datos**
    En `WEB-INF/jspf/conexion.jspf` y `WEB-INF/jspf/conexion2024.jspf` ajusta los datos de conexión:
 
    ```jsp
    <sql:setDataSource var="empleados"
-                      driver="com.mysql.jdbc.Driver"
+                      driver="com.mysql.cj.jdbc.Driver"
                       url="jdbc:mysql://localhost:3306/empleados"
                       user="root"
                       password="" />
    ```
 
    > Crea previamente la base de datos `empleados` con la tabla que usan los ejercicios de SQL.
+   > Los archivos `conexion.jspf` ya leen las variables `MYSQL_ADDON_*` de Clever Cloud y, si no
+   > existen, caen automáticamente en `localhost` para el desarrollo local.
 
 5. **Ejecutar**
    Abre en el navegador:
@@ -145,6 +150,40 @@ trabajo_jstl/
    ```
 
    El `index.jsp` sirve como página de inicio y enlaza con las dos guías.
+
+---
+
+## Despliegue en Clever Cloud
+
+El proyecto incluye un WAR ya empaquetado (`trabajo_jstl.war`) y el archivo de configuración
+[`clevercloud/war.json`](clevercloud/war.json). Clever Cloud lo despliega en **Tomcat 9**
+(compatible con el namespace `javax` de JSTL 1.2).
+
+> **No uses Tomcat 10**: usa `jakarta.*` y rompe todos los taglibs `c`, `sql`, `fmt`, `x` de JSTL 1.2.
+
+### Pasos
+
+1. **Crear la aplicación** en la consola de Clever Cloud:
+   *Create → Application → **Java + WAR*** (o con la CLI: `clever create --type war trabajo_jstl`).
+
+2. **Añadir un add-on MySQL** y enlazarlo a la aplicación. Clever Cloud inyecta automáticamente
+   las variables `MYSQL_ADDON_HOST`, `MYSQL_ADDON_PORT`, `MYSQL_ADDON_DB`, `MYSQL_ADDON_USER`
+   y `MYSQL_ADDON_PASSWORD`, que ya usan los `conexion.jspf`.
+
+3. **Definir la versión de Java** (variable de entorno de la aplicación):
+   `CC_JAVA_VERSION=11`.
+
+4. **Crear la base de datos y la tabla** `empleados` en el add-on (panel de administración de
+   MySQL del add-on).
+
+5. **Desplegar**:
+   ```bash
+   git add -A
+   git commit -m "chore: preparar deploy en Clever Cloud"
+   git push origin master
+   ```
+   Si conectas el repositorio de GitHub a Clever Cloud, el push anterior dispara el deploy.
+   También puedes desplegar con la CLI: `clever deploy`.
 
 ---
 

@@ -25,6 +25,8 @@ dist/
 # ------- Despliegue / empaquetado -------
 *.war
 *.ear
+# El WAR de deploy en Clever Cloud sí se versiona (deploy "dry war")
+!/trabajo_jstl.war
 
 # ------- Sistema operativo -------
 Thumbs.db
