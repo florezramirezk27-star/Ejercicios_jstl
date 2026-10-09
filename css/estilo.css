@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --j-primary: #4361ee;
+    --j-secondary: #7209b7;
+    --j-accent: #f72585;
+    --j-gradient: linear-gradient(120deg, #4361ee, #7209b7 55%, #f72585);
+    --j-shadow: 0 10px 30px rgba(30, 41, 59, .12);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track { background: #eef2ff; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#4361ee, #7209b7);
+    border-radius: 10px;
+}
+::selection { background: #7209b7; color: #fff; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background:
+        radial-gradient(1200px 500px at 100% -10%, rgba(114, 9, 183, .18), transparent 60%),
+        radial-gradient(1000px 500px at -10% 0%, rgba(67, 97, 238, .16), transparent 60%),
+        linear-gradient(180deg, #f8faff 0%, #eef2ff 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    animation: fadeIn .5s ease;
+}
+
+body.bg-light {
+    background:
+        radial-gradient(1200px 500px at 100% -10%, rgba(114, 9, 183, .18), transparent 60%),
+        radial-gradient(1000px 500px at -10% 0%, rgba(67, 97, 238, .16), transparent 60%),
+        linear-gradient(180deg, #f8faff 0%, #eef2ff 100%);
+    background-attachment: fixed;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ---------------- Cabecera compartida (#encabezado) ---------------- */
+#encabezado {
+    background: var(--j-gradient) !important;
+    box-shadow: 0 6px 24px rgba(67, 97, 238, .35);
+    border-bottom: 3px solid rgba(255, 255, 255, .25);
+}
+#encabezado h3, #encabezado .text-white { text-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
+#encabezado img { filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .3)); }
+
+/* Cabecera y footer de la guía 2024 */
+.container-fluid.bg-danger {
+    background: var(--j-gradient) !important;
+    letter-spacing: .12em;
+    font-weight: 600;
+}
+#menu {
+    background: rgba(255, 255, 255, .85) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(30, 41, 59, .08);
+}
+#menu .nav-link { color: #475569; }
+#menu .nav-link:hover { color: var(--j-primary); font-weight: 600; }
+#Derechos {
+    background: var(--j-gradient) !important;
+    color: #fff;
+    box-shadow: 0 -6px 24px rgba(67, 97, 238, .25);
+}
+#Derechos p { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .2); }
+
+footer.bg-dark {
+    background: var(--j-gradient) !important;
+    border-top: 3px solid rgba(255, 255, 255, .25);
+}
+footer.bg-dark p { color: #fff; }
+
+/* ---------------- Tarjetas ---------------- */
+.card {
+    border: none;
+    border-radius: 1.1rem;
+    background: #fff;
+    box-shadow: var(--j-shadow);
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--j-gradient);
+    border-radius: 1.1rem 1.1rem 0 0;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 45px rgba(30, 41, 59, .18);
+}
+.card-header { border-radius: 1.1rem 1.1rem 0 0; }
+.card-header.bg-primary {
+    background: var(--j-gradient) !important;
+    border: none;
+    letter-spacing: .03em;
+}
+
+.card-ejercicio {
+    border-radius: 1rem;
+    cursor: pointer;
+}
+.card-ejercicio:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(67, 97, 238, .28) !important;
+}
+.card-ejercicio h3, .card-ejercicio h4 { color: #1f2937; font-weight: 700; }
+
+.panel {
+    background: #f8faff;
+    border: 1px solid #e5e9f5;
+    border-radius: .9rem;
+    padding: 1.1rem 1.25rem;
+}
+.panel-heading {
+    color: var(--j-primary);
+    font-weight: 600;
+    border-bottom: 2px dashed #dbe3f5;
+    padding-bottom: .4rem;
+    margin-bottom: .5rem;
+}
+.panel-body { color: #374151; }
+
+/* ---------------- Tipografía ---------------- */
+h1, h2, h3, h4 { color: #1e293b; font-weight: 700; }
+.container > h1, section > div > h1 {
+    background: var(--j-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+a { color: var(--j-primary); }
+code {
+    color: var(--j-secondary);
+    background: #f1f0ff;
+    padding: .15rem .45rem;
+    border-radius: .45rem;
+}
+
+/* ---------------- Botones ---------------- */
+.btn {
+    border-radius: 50rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    transition: all .2s ease;
+}
+.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    border: none !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, .35);
+}
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, .45);
+}
+.btn-outline-dark { border-width: 2px; }
+.btn-outline-dark:hover {
+    background: var(--j-gradient);
+    border-color: transparent;
+    color: #fff;
+}
+.btn-outline-light { border-width: 2px; }
+.btn-outline-light:hover {
+    background: #fff;
+    border-color: #fff;
+    color: var(--j-primary) !important;
+}
+.btn-outline-info { border-width: 2px; }
+.btn-outline-info:hover { background: #0dcaf0; color: #fff; }
+
+/* ---------------- Formularios ---------------- */
+.form-control {
+    border-radius: .9rem;
+    border: 1.5px solid #e2e8f0;
+    padding: .6rem .9rem;
+    transition: border-color .2s, box-shadow .2s;
+}
+.form-control:focus {
+    border-color: var(--j-primary);
+    box-shadow: 0 0 0 .25rem rgba(67, 97, 238, .15);
+}
+.form-control.rounded-pill { border-radius: 50rem; }
+.form-label { font-weight: 600; color: #374151; }
+
+/* ---------------- Tablas ---------------- */
+.table { overflow: hidden; }
+.table-dark {
+    --bs-table-bg: #1e293b;
+    --bs-table-striped-bg: #24314a;
+    border-radius: 1rem;
+}
+.table-dark thead th {
+    background: var(--j-gradient);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: .04em;
+}
+.table-dark td { border-color: #334155; }
+.table td { vertical-align: middle; }
+.table-hover tbody tr:hover { background: rgba(67, 97, 238, .06); }
+
+/* ---------------- Avisos ---------------- */
+.alert-warning {
+    border: none;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #fff7e0, #ffe9c7);
+    border-left: 6px solid #f59e0b;
+    box-shadow: var(--j-shadow);
+}
+.alert-warning code {
+    background: #fde9c8;
+    color: #b45309;
+}
