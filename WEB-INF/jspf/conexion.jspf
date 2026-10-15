@@ -2,12 +2,33 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
 <%--
-  Conexión flexible.
-  En Clever Cloud toma los datos del add-on MySQL (variables MYSQL_ADDON_*).
-  En local, si esas variables no existen, cae en localhost/root/empleados.
+  Conexion a MySQL (Guia 2006).
+  En Clever Cloud toma los datos del add-on MySQL (variables de entorno MYSQL_ADDON_*).
+  En local, si esas variables no existen, usa XAMPP: localhost / root / base 'empleados'.
 --%>
+<%
+    String dbHost = System.getenv("MYSQL_ADDON_HOST");
+    String dbPort = System.getenv("MYSQL_ADDON_PORT");
+    String dbName = System.getenv("MYSQL_ADDON_DB");
+    String dbUser = System.getenv("MYSQL_ADDON_USER");
+    String dbPass = System.getenv("MYSQL_ADDON_PASSWORD");
+
+    if (dbHost == null || dbHost.trim().isEmpty()) {
+        dbHost = "localhost";
+        dbPort = "3306";
+        dbName = "empleados";
+        dbUser = "root";
+        dbPass = "";
+    }
+    if (dbPort == null || dbPort.trim().isEmpty()) {
+        dbPort = "3306";
+    }
+
+    String dbUrl = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName
+            + "?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true";
+%>
 <sql:setDataSource var="empleados"
                    driver="com.mysql.cj.jdbc.Driver"
-                   url="jdbc:mysql://${empty env['MYSQL_ADDON_HOST'] ? 'localhost' : env['MYSQL_ADDON_HOST']}:${empty env['MYSQL_ADDON_PORT'] ? '3306' : env['MYSQL_ADDON_PORT']}/${empty env['MYSQL_ADDON_DB'] ? 'empleados' : env['MYSQL_ADDON_DB']}?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"
-                   user="${empty env['MYSQL_ADDON_USER'] ? 'root' : env['MYSQL_ADDON_USER']}"
-                   password="${empty env['MYSQL_ADDON_PASSWORD'] ? '' : env['MYSQL_ADDON_PASSWORD']}" />
+                   url="<%= dbUrl %>"
+                   user="<%= dbUser %>"
+                   password="<%= dbPass %>" />
